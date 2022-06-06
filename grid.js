@@ -1,8 +1,14 @@
 "use strict";
 
-const STATE = {
-    EMPTY: 255,
-    FILLED: 0
+const COLOR = {
+    Grey: () => fill(127, 127, 127),
+    Cyan: () => fill(0, 255, 255),
+    Yellow: () => fill(255, 255, 0),
+    Purple: () => fill(128, 128, 0),
+    Green: () => fill(0, 255, 0),
+    Red: () => fill(255, 0, 0),
+    Blue: () => fill(0, 0, 255),
+    Orange: () => fill(255, 127, 0),
 }
 
 class Grid {
@@ -52,18 +58,14 @@ class Grid {
 }
 class Cell {
     constructor(x, y, size) {
-        this.state = STATE.EMPTY;
+        this.color = COLOR.Grey;
         this.size = size;
         this.offset = new Vector(x * this.size, y * this.size);
     }
 
     draw() {
-        if (this.used) {
-            fill(0);
-        } else {
-            fill(255);
-        }
+        this.color();
         stroke(0);
-        square(this.offset.x, this.offset.y, CELL_SIZE);
+        square(this.offset.x, this.offset.y, this.size);
     }
 }
