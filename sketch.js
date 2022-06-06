@@ -1,12 +1,18 @@
+"use strict";
 
+const CELL_SIZE = 50;
+const GRID = {
+    WIDTH: 10,
+    HEIGHT: 15,
+}
 
+let grid;
 function setup() {
-    createCanvas(500, 500);
-    background(125);
-    grid = new Grid(10,20);
-    grid.drawGrid();
-  }
-  []
-  function draw() {
-    
-  }
+    grid = new Grid(GRID.WIDTH, GRID.HEIGHT, CELL_SIZE);
+    createCanvas(GRID.WIDTH * CELL_SIZE, GRID.HEIGHT * CELL_SIZE);
+    grid.init();
+}
+
+function draw() {
+    grid.draw();
+}
