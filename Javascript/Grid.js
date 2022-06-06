@@ -35,7 +35,7 @@ class Grid {
     }
 
     drawCells() {
-        strokeWeight(1);   
+        strokeWeight(1);
         for (let x = 0; x < this.width; x++) {
             for (let y = 0; y < this.height; y++) {
                 this.cells[x][y].draw(x, y);
@@ -49,7 +49,6 @@ class Grid {
         line(0, 0, this.pixels.width, 0);
         line(this.pixels.width, 0, this.pixels.width, this.pixels.height);
         line(0, this.pixels.height, this.pixels.width, this.pixels.height);
-
     }
 
     addPiece(piece) {
