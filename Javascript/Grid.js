@@ -1,15 +1,11 @@
 "use strict";
 
-const COLOR = {
-    Grey: () => fill(127, 127, 127),
-    Cyan: () => fill(0, 255, 255),
-    Yellow: () => fill(255, 255, 0),
-    Purple: () => fill(128, 128, 0),
-    Green: () => fill(0, 255, 0),
-    Red: () => fill(255, 0, 0),
-    Blue: () => fill(0, 0, 255),
-    Orange: () => fill(255, 127, 0),
+const STATE = {
+    EMPTY: 255,
+    FILLED: 0
 }
+
+const colours = ['00FFFF', 'FFFF00', '800080', '00FF00', 'FF0000', '0000FF', 'FF7F00', '7F7F7F'];
 
 class Grid {
     constructor(width, height, cellSize) {
@@ -39,7 +35,7 @@ class Grid {
     }
 
     drawCells() {
-        strokeWeight(1);
+        strokeWeight(1);   
         for (let x = 0; x < this.width; x++) {
             for (let y = 0; y < this.height; y++) {
                 this.cells[x][y].draw(x, y);
@@ -55,17 +51,35 @@ class Grid {
         line(0, this.pixels.height, this.pixels.width, this.pixels.height);
 
     }
+
+    addPiece(piece) {
+        // iterate through the piece's cells
+        for (let row = 0; row < piece.size; row++) {
+            for (let col = 0; col < piece.size; col++) {
+                // if the cell is occupied, draw it
+                if (piece.representation[row][col]) {
+                    // activate the state of the cell
+                    this.cells[piece.position.x + col][piece.position.y + row].state = STATE.FILLED;
+                }
+            }
+        }
+    }
 }
+
 class Cell {
     constructor(x, y, size) {
-        this.color = COLOR.Grey;
+        this.state = STATE.EMPTY;
         this.size = size;
         this.offset = new Vector(x * this.size, y * this.size);
     }
 
     draw() {
-        this.color();
+        if (this.state === STATE.FILLED) {
+            fill(50);
+        } else {
+            fill(255);
+        }
         stroke(0);
-        square(this.offset.x, this.offset.y, this.size);
+        square(this.offset.x, this.offset.y, CELL_SIZE);
     }
 }
