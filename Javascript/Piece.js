@@ -2,8 +2,47 @@ class Piece {
     constructor (x, y, type) {
         this.representation = pieces[type];
         this.size = this.representation.length;
-        this.position = new Vector(x, y);
+        this.x = x;
+		this.y = y;
+		this.dropInterval = 500 // in ms
+		this.dropBuffer = 0; // time since last drop
     }
+
+	update(time) {
+		this.dropBuffer += time;
+	}
+	
+
+	timeToFall() {    
+		return this.dropBuffer > this.dropInterval
+	}
+
+	draw() {
+		for (let row = 0; row < this.size; row++) {
+			for (let col = 0; col < this.size; col++) {
+				if (this.representation[row][col]) {
+					this.cells[col][row].draw(this.x + col, this.y + row);
+				}
+			}
+		}
+	}
+	
+	resetBuffer() {
+		this.dropBuffer = 0;
+	}
+
+	moveDown() {
+		this.y++;
+	}
+	moveRight() {
+		this.x++;
+	}
+	moveLeft() {
+		this.x--;
+	}
+	moveUp() {
+		this.y--;
+	}
 
     rotate() {
         // Rotate Piece
@@ -14,7 +53,7 @@ const pieces = {
 
 	O: [
 		[1, 1],
-		[1, 1]
+		[1, 1],
 	],
 
 

@@ -58,11 +58,55 @@ class Grid {
                 // if the cell is occupied, draw it
                 if (piece.representation[row][col]) {
                     // activate the state of the cell
-                    this.cells[piece.position.x + col][piece.position.y + row].state = STATE.FILLED;
+                    this.cells[piece.x + col][piece.y + row].state = STATE.FILLED;
                 }
             }
         }
     }
+
+    clearPiece(piece) {
+        for (let row = 0; row < piece.size; row++) {
+            for (let col = 0; col < piece.size; col++) {
+                if (piece.representation[row][col]) {
+                    this.cells[piece.x + col][piece.y + row].state = STATE.EMPTY;
+                }
+            }
+        }
+    }
+
+    isValid(piece) {
+		
+		for (let row = 0; row < piece.size; row++) {
+			for (let col = 0; col < piece.size; col++) {
+				
+				if (piece.representation[row][col] != 0) {
+					
+					let gridRow = piece.y + row;
+					let gridCol = piece.x + col;
+					
+                    // debug print
+                    
+
+					if (gridRow < 0 || gridRow >= this.height || gridCol < 0 || gridCol >= this.width) {
+                        console.log(`gridRow: ${gridRow}\n` + `piece.y: ${piece.y}\n` + `row: ${row}\n`);
+                        return false;
+                    }
+
+                    if (this.cells[gridCol][gridRow].state == STATE.FILLED) {
+                        console.log(`gridRow: ${gridRow}\n` + `piece.y: ${piece.y}\n` + `row: ${row}\n`);
+                        return false;
+                    }
+
+
+                
+                    
+                }
+			}
+		}
+
+		return true;
+		
+	}
 }
 
 class Cell {
