@@ -1,87 +1,76 @@
 "use strict";
 
-const CELL_SIZE = 50;
+const CELL_SIZE = 30;
 const GRID = {
-  WIDTH: 10,
-  HEIGHT: 10,
+    WIDTH: 10,
+    HEIGHT: 20,
 };
 
 let grid,
-  activePiece,
-  paused = false;
+    activePiece,
+    paused = false;
 
 function setup() {
-  grid = new Grid(GRID.WIDTH, GRID.HEIGHT, CELL_SIZE);
-  createCanvas(GRID.WIDTH * CELL_SIZE, GRID.HEIGHT * CELL_SIZE);
-  updatePiece();
+    grid = new Grid(GRID.WIDTH, GRID.HEIGHT, CELL_SIZE);
+    console.log(grid);
+    createCanvas(GRID.WIDTH * CELL_SIZE, GRID.HEIGHT * CELL_SIZE);
+    updatePiece();
 }
 
 let prev = 0;
 function draw() {
-  //============================
-  // Get time passed since last frame
-  //============================
+    //============================
+    // Get time passed since last frame
+    //============================
 
-  let curr = millis();
-  let delta = curr - prev;
-  prev = curr;
+    let curr = millis();
+    let delta = curr - prev;
+    prev = curr;
 
-  //============================
-  // Update
-  //============================
+    //============================
+    // Update
+    //============================
 
-  // clear the previous piece from the grid before drawing the new one
+    if (!paused) activePiece.update(delta);
 
-  grid.draw();
+    if (activePiece.timeToFall()) {
+        activePiece.resetBuffer();
 
-  if (!paused) activePiece.update(delta);
+        // clear the previous piece from the grid before drawing the new one
+        grid.clearPiece(activePiece);
+        activePiece.moveDown();
 
-  if (activePiece.timeToFall()) {
-    activePiece.resetBuffer();
-
-    grid.clearPiece(activePiece);
-    activePiece.moveDown();
-
-    if (!grid.isValid(activePiece)) {
-      activePiece.moveUp();
-      updatePiece();
+        if (!grid.isValid(activePiece)) {
+            activePiece.moveUp();
+            updatePiece();
+        }
     }
+    //============================
+    // Draw
+    //============================
+    if (activePiece) grid.addPiece(activePiece);
+    grid.draw();
 
-    grid.addPiece(activePiece);
-  }
+    // clearLines doesnt work yet
+    //grid.clearLines();
 }
 
 function updatePiece() {
-  if (activePiece) {
+    if (activePiece) {
+        grid.addPiece(activePiece);
+    }
+
+    const pieceType = random(["O", "J", "L", "S", "Z", "T", "I"]);
+    activePiece = new Piece(pieceType);
+
+    if (!grid.isValid(activePiece)) {
+        // The game is over
+        noLoop();
+        grid.resetGrid();
+        grid.addPiece(new Piece("Gameover", 1));
+        grid.draw();
+        activePiece = undefined;
+        return;
+    }
     grid.addPiece(activePiece);
-  }
-
-  const pieceType = random(["O", "J", "L", "S", "Z", "T", "I"]);
-  activePiece = new Piece(pieceType);
-
-  if (!grid.isValid(activePiece)) {
-    // The game is over
-    console.log("game over");
-    grid.resetGrid();
-    grid.addPiece(new Piece("Gameover"));
-    grid.draw();
-    noLoop();
-  }
-
-  grid.addPiece(activePiece);
-  redraw();
-}
-
-function keyPressed() {
-  switch (key.toLowerCase()) {
-    case "r":
-      grid.resetGrid();
-      activePiece = null;
-      updatePiece();
-      break;
-
-    case "p":
-      paused = !paused;
-      break;
-  }
 }
