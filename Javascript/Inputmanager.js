@@ -1,3 +1,5 @@
+"use strict";
+
 window.addEventListener(
     "keydown",
     function (event) {
@@ -41,6 +43,7 @@ window.addEventListener(
 
             case "p":
                 paused = !paused;
+                updatePauseInfo();
                 break;
 
             // key r

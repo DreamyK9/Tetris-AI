@@ -1,3 +1,5 @@
+"use strict";
+
 class Piece {
     constructor(type, y, x) {
         this.representation = pieces[type];
