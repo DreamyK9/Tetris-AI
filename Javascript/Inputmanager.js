@@ -46,7 +46,7 @@ window.addEventListener(
             // instant drop
             case " ": // space
                 activePiece.hardDrop();
-                updatePiece();
+                spawnPiece();
                 break;
 
             // pause
@@ -59,7 +59,7 @@ window.addEventListener(
             case "r":
                 grid.reset();
                 activePiece = undefined;
-                updatePiece();
+                spawnPiece();
                 grid.draw();
                 loop();
                 break;

@@ -1,7 +1,7 @@
 "use strict";
 
-// control constants
-const CELL_SIZE = 30;
+
+const CELL_SIZE = 35;
 const GRID_SIZE = {
     W: 10,
     H: 20,
@@ -14,10 +14,10 @@ let grid,
 
 // setup called once at the start
 function setup() {
-    grid = new Grid(GRID_SIZE.W, GRID_SIZE.H, CELL_SIZE);
-    console.log(grid);
+    // initialize canvas, grid and first active piece
     createCanvas(GRID_SIZE.W * CELL_SIZE, GRID_SIZE.H * CELL_SIZE);
-    updatePiece();
+    grid = new Grid(GRID_SIZE.W, GRID_SIZE.H, CELL_SIZE);
+    activePiece = spawnPiece();
 }
 
 let prev = 0;
@@ -36,17 +36,23 @@ function draw() {
     // update piece position
     if (!paused) activePiece.update(delta);
 
-    // Drop piece of timer is up
+    // Drop piece if timer is up
     if (activePiece.dropReady) {
         activePiece.resetBuffer();
 
         // clear the previous representation from the grid
         grid.clearPiece(activePiece);
+        // move piece down
         activePiece.moveDown();
 
+        // if active piece hits the ground
         if (!grid.isValid(activePiece)) {
+            // place it in last position
             activePiece.moveUp();
-            updatePiece();
+            grid.insertPiece(activePiece);
+
+            // switch to new piece
+            activePiece = spawnPiece();
         }
     }
     //============================
@@ -55,26 +61,33 @@ function draw() {
     if (activePiece) grid.insertPiece(activePiece);
     grid.draw();
 
-    // clearLines doesnt work yet
+    //! clearLines doesn't work yet
     //grid.clearLines();
 }
 
-function updatePiece() {
-    if (activePiece) {
-        grid.insertPiece(activePiece);
-    }
+// spawn new piece at top center of grid
+function spawnPiece() {
 
+    // get random piece type
     const PIECE_TYPE = random(["O", "J", "L", "S", "Z", "T", "I"]);
-    activePiece = new Piece(PIECE_TYPE);
+    // create new piece of that type
+    const PIECE = new Piece(PIECE_TYPE);
 
-    if (!grid.isValid(activePiece)) {
-        // The game is over
+    // if there is no space for the new element
+    if (!grid.isValid(PIECE)) {
+        // The game is over!
+
+        // break out of game loop
         noLoop();
+
+        // draw game over text
         grid.reset();
         grid.insertPiece(new Piece("Gameover", 1, 1));
         grid.draw();
-        activePiece = undefined;
-        return;
+
+        // give back no piece to control
+        return undefined;
     }
-    grid.insertPiece(activePiece);
+    // give back new piece
+    return PIECE;
 }
