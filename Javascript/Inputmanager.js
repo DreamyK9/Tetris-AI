@@ -46,9 +46,8 @@ window.addEventListener(
                 updatePauseInfo();
                 break;
 
-            // key r
             case "r":
-                grid.resetGrid();
+                grid.reset();
                 activePiece = undefined;
                 updatePiece();
                 grid.draw();

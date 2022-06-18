@@ -1,9 +1,9 @@
 "use strict";
 
 const CELL_SIZE = 30;
-const GRID = {
-    WIDTH: 10,
-    HEIGHT: 20,
+const GRID_SIZE = {
+    W: 10,
+    H: 20,
 };
 
 let grid,
@@ -11,9 +11,9 @@ let grid,
     paused = false;
 
 function setup() {
-    grid = new Grid(GRID.WIDTH, GRID.HEIGHT, CELL_SIZE);
+    grid = new Grid(GRID_SIZE.W, GRID_SIZE.H, CELL_SIZE);
     console.log(grid);
-    createCanvas(GRID.WIDTH * CELL_SIZE, GRID.HEIGHT * CELL_SIZE);
+    createCanvas(GRID_SIZE.W * CELL_SIZE, GRID_SIZE.H * CELL_SIZE);
     updatePiece();
 }
 
@@ -23,9 +23,9 @@ function draw() {
     // Get time passed since last frame
     //============================
 
-    let curr = millis();
-    let delta = curr - prev;
-    prev = curr;
+    let current = millis();
+    let delta = current - prev;
+    prev = current;
 
     //============================
     // Update
@@ -48,7 +48,7 @@ function draw() {
     //============================
     // Draw
     //============================
-    if (activePiece) grid.addPiece(activePiece);
+    if (activePiece) grid.insertPiece(activePiece);
     grid.draw();
 
     // clearLines doesnt work yet
@@ -57,20 +57,20 @@ function draw() {
 
 function updatePiece() {
     if (activePiece) {
-        grid.addPiece(activePiece);
+        grid.insertPiece(activePiece);
     }
 
-    const pieceType = random(["O", "J", "L", "S", "Z", "T", "I"]);
-    activePiece = new Piece(pieceType);
+    const PIECE_TYPE = random(["O", "J", "L", "S", "Z", "T", "I"]);
+    activePiece = new Piece(PIECE_TYPE);
 
     if (!grid.isValid(activePiece)) {
         // The game is over
         noLoop();
-        grid.resetGrid();
-        grid.addPiece(new Piece("Gameover", 1));
+        grid.reset();
+        grid.insertPiece(new Piece("Gameover", 1, 1));
         grid.draw();
         activePiece = undefined;
         return;
     }
-    grid.addPiece(activePiece);
+    grid.insertPiece(activePiece);
 }

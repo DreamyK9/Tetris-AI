@@ -1,13 +1,32 @@
 "use strict";
 
+// time between piece drops
+const DROP_INTERVAL = 500; // ms
+
+const PIECE_COLORS = {
+    I: COLOR.cyan,
+    J: COLOR.blue,
+    L: COLOR.orange,
+    O: COLOR.yellow,
+    S: COLOR.green,
+    T: COLOR.purple,
+    Z: COLOR.red,
+    Gameover: COLOR.black
+}
+
 class Piece {
-    constructor(type, y, x) {
-        this.representation = pieces[type];
+    constructor(type, x, y) {
+        // visual representation
+        this.representation = PATTERNS[type];
+        this.color = PIECE_COLORS[type];
+
+        // position and size
         this.size = this.representation.length;
-        this.x = x == null ? ceil((GRID.WIDTH - this.size) / 2) : x;
-        this.y = y || 0;
-        this.dropInterval = 500; // in ms
-        this.dropBuffer = 0; // time since last drop
+        this.x = x == null ? ceil((grid.width - this.size) / 2) : x;
+        this.y = y ? y : 0;
+
+        // time since last drop
+        this.dropBuffer = 0;
     }
 
     update(time) {
@@ -15,7 +34,7 @@ class Piece {
     }
 
     timeToFall() {
-        return this.dropBuffer > this.dropInterval;
+        return this.dropBuffer > DROP_INTERVAL;
     }
 
     draw() {
@@ -57,7 +76,7 @@ class Piece {
     }
 }
 
-const pieces = {
+const PATTERNS = {
     O: [
         [1, 1],
         [1, 1],
