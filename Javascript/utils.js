@@ -11,7 +11,7 @@ class Vector {
 const pauseInfo = document.querySelector('.paused');
 // generator for toggling "paused" info text
 function updatePauseInfo () {
-    if (paused) {
+    if (GAME.paused) {
         pauseInfo.textContent = 'Paused';
     } else {
         pauseInfo.textContent = 'Playing';

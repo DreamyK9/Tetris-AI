@@ -7,10 +7,13 @@ const GRID_SIZE = {
     H: 20,
 };
 
+const GAME = {
+    paused: false,
+    controlsLocked: false,
+};
+
 // runtime variables
-let grid,
-    activePiece,
-    paused = false;
+let grid, activePiece;
 
 // setup called once at the start
 function setup() {
@@ -34,7 +37,7 @@ function draw() {
     //============================
 
     // update piece position
-    if (!paused) activePiece.update(delta);
+    if (!GAME.paused) activePiece.update(delta);
 
     // Drop piece if timer is up
     if (activePiece.dropReady) {
@@ -47,8 +50,10 @@ function draw() {
 
         // if active piece hits the ground
         if (!grid.isValid(activePiece)) {
-            // place it in last position
-            activePiece.moveUp();
+
+            // move it up into valid position
+            while (!grid.isValid(activePiece))
+                activePiece.moveUp();
             grid.insertPiece(activePiece);
 
             // switch to new piece
@@ -75,19 +80,25 @@ function spawnPiece() {
 
     // if there is no space for the new element
     if (!grid.isValid(PIECE)) {
+        // end the game
+        gameOver();
+        return undefined;
+    }
+
+    // give back new piece
+    return PIECE;
+}
+
+function gameOver() {
         // The game is over!
 
         // break out of game loop
         noLoop();
 
-        // draw game over text
+        // draw "Game Over" text
         grid.reset();
         grid.insertPiece(new Piece("Gameover", 1, 1));
         grid.draw();
 
         // give back no piece to control
-        return undefined;
-    }
-    // give back new piece
-    return PIECE;
 }

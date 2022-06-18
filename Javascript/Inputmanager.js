@@ -12,35 +12,47 @@ window.addEventListener(
         switch (event.key) {
             // move left
             case "ArrowLeft":
-                activePiece.moveLeft();
+                if (!GAME.controlsLocked) {
+                    activePiece.moveLeft();
 
-                if (!grid.isValid(activePiece)) {
-                    activePiece.moveRight();
+                    if (!grid.isValid(activePiece)) {
+                        activePiece.moveRight();
+                    }
                 }
-
                 break;
 
             // move right
             case "ArrowRight":
-                activePiece.moveRight();
+                if (!GAME.controlsLocked) {
+                    activePiece.moveRight();
 
-                if (!grid.isValid(activePiece)) {
-                    activePiece.moveLeft();
+                    if (!grid.isValid(activePiece)) {
+                        activePiece.moveLeft();
+                    }
                 }
                 break;
 
             // move down
             case "ArrowDown":
-                activePiece.moveDown();
-                if (!grid.isValid(activePiece)) {
-                    activePiece.moveUp();
-                } else activePiece.resetBuffer();
-
+                if (!GAME.controlsLocked) {
+                    activePiece.moveDown();
+                    if (!grid.isValid(activePiece)) {
+                        activePiece.moveUp();
+                    } else activePiece.resetBuffer();
+                }
                 break;
 
             // rotate
             case "ArrowUp":
                 activePiece.rotate();
+
+                while (!grid.isValid(activePiece)) {
+                    //TODO: need to handle rotation into ground or other pieces
+                    if (activePiece.x < 5)
+                        activePiece.moveRight();
+                    else
+                        activePiece.moveLeft();
+                }
                 break;
 
             // instant drop
@@ -51,16 +63,15 @@ window.addEventListener(
 
             // pause
             case "p":
-                paused = !paused;
+                GAME.paused = !GAME.paused;
                 updatePauseInfo();
                 break;
 
             // reset
             case "r":
                 grid.reset();
-                activePiece = undefined;
-                spawnPiece();
-                grid.draw();
+                activePiece = spawnPiece();
+                // start game loop, in case it was stopped before
                 loop();
                 break;
         }
