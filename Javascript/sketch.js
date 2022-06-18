@@ -1,15 +1,18 @@
 "use strict";
 
+// control constants
 const CELL_SIZE = 30;
 const GRID_SIZE = {
     W: 10,
     H: 20,
 };
 
+// runtime variables
 let grid,
     activePiece,
     paused = false;
 
+// setup called once at the start
 function setup() {
     grid = new Grid(GRID_SIZE.W, GRID_SIZE.H, CELL_SIZE);
     console.log(grid);
@@ -22,7 +25,6 @@ function draw() {
     //============================
     // Get time passed since last frame
     //============================
-
     let current = millis();
     let delta = current - prev;
     prev = current;
@@ -31,12 +33,14 @@ function draw() {
     // Update
     //============================
 
+    // update piece position
     if (!paused) activePiece.update(delta);
 
-    if (activePiece.timeToFall()) {
+    // Drop piece of timer is up
+    if (activePiece.dropReady) {
         activePiece.resetBuffer();
 
-        // clear the previous piece from the grid before drawing the new one
+        // clear the previous representation from the grid
         grid.clearPiece(activePiece);
         activePiece.moveDown();
 

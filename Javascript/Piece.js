@@ -31,23 +31,26 @@ class Piece {
         this.dropBuffer = 0;
     }
 
+    // update drop timer
     update(time) {
         this.dropBuffer += time;
     }
 
-    timeToFall() {
+    // whether drop time is up
+    get dropReady() {
         return this.dropBuffer > DROP_INTERVAL;
     }
 
-    draw() {
-        for (let row = 0; row < this.size; row++) {
-            for (let col = 0; col < this.size; col++) {
-                if (this.representation[row][col]) {
-                    this.cells[col][row].draw(this.x + col, this.y + row);
-                }
-            }
-        }
-    }
+    // !unused own draw function
+    // draw() {
+    //     for (let row = 0; row < this.size; row++) {
+    //         for (let col = 0; col < this.size; col++) {
+    //             if (this.representation[row][col]) {
+    //                 this.cells[col][row].draw(this.x + col, this.y + row);
+    //             }
+    //         }
+    //     }
+    // }
 
     resetBuffer() {
         this.dropBuffer = 0;
@@ -82,9 +85,9 @@ class Piece {
 const PATTERNS = {
     O: [
         [
-        [1, 1],
-        [1, 1],
-    ],
+            [1, 1],
+            [1, 1],
+        ],
         [
             [1, 1],
             [1, 1],
@@ -101,10 +104,10 @@ const PATTERNS = {
 
     J: [
         [
-        [1, 1, 1],
-        [0, 0, 1],
-        [0, 0, 0],
-    ],
+            [1, 1, 1],
+            [0, 0, 1],
+            [0, 0, 0],
+        ],
         [
             [0, 0, 1],
             [0, 0, 1],
@@ -124,9 +127,9 @@ const PATTERNS = {
 
     L: [
         [
-        [1, 1, 1],
-        [1, 0, 0],
-        [0, 0, 0],
+            [1, 1, 1],
+            [1, 0, 0],
+            [0, 0, 0],
         ],
         [
             [0, 1, 1],
@@ -147,10 +150,10 @@ const PATTERNS = {
 
     S: [
         [
-        [0, 1, 1],
-        [1, 1, 0],
-        [0, 0, 0],
-    ],
+            [0, 1, 1],
+            [1, 1, 0],
+            [0, 0, 0],
+        ],
         [
             [0, 1, 0],
             [0, 1, 1],
@@ -170,10 +173,10 @@ const PATTERNS = {
 
     Z: [
         [
-        [1, 1, 0],
-        [0, 1, 1],
-        [0, 0, 0],
-    ],
+            [1, 1, 0],
+            [0, 1, 1],
+            [0, 0, 0],
+        ],
         [
             [0, 0, 1],
             [0, 1, 1],
@@ -193,9 +196,9 @@ const PATTERNS = {
 
     T: [
         [
-        [1, 1, 1],
-        [0, 1, 0],
-        [0, 0, 0],
+            [1, 1, 1],
+            [0, 1, 0],
+            [0, 0, 0],
         ],
         [
             [0, 0, 1],
@@ -216,11 +219,11 @@ const PATTERNS = {
 
     I: [
         [
-        [1, 1, 1, 1],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-    ],
+            [1, 1, 1, 1],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+        ],
         [
             [0, 0, 1, 0],
             [0, 0, 1, 0],
@@ -243,14 +246,14 @@ const PATTERNS = {
 
     Gameover: [
         [
-        [1, 0, 1, 0, 0, 1, 0, 1],
-        [0, 1, 0, 0, 0, 0, 1, 0],
-        [1, 0, 1, 0, 0, 1, 0, 1],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 1, 1, 1, 1, 0, 0],
-        [0, 1, 0, 0, 0, 0, 1, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 0, 1, 0, 0, 1, 0, 1],
+            [0, 1, 0, 0, 0, 0, 1, 0],
+            [1, 0, 1, 0, 0, 1, 0, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 1, 1, 0, 0],
+            [0, 1, 0, 0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
         ],
     ],
 };

@@ -10,6 +10,7 @@ window.addEventListener(
         if (activePiece) grid.clearPiece(activePiece);
 
         switch (event.key) {
+            // move left
             case "ArrowLeft":
                 activePiece.moveLeft();
 
@@ -19,6 +20,7 @@ window.addEventListener(
 
                 break;
 
+            // move right
             case "ArrowRight":
                 activePiece.moveRight();
 
@@ -27,6 +29,7 @@ window.addEventListener(
                 }
                 break;
 
+            // move down
             case "ArrowDown":
                 activePiece.moveDown();
                 if (!grid.isValid(activePiece)) {
@@ -40,17 +43,19 @@ window.addEventListener(
                 activePiece.rotate();
                 break;
 
-            //case space
-            case " ":
+            // instant drop
+            case " ": // space
                 activePiece.hardDrop();
                 updatePiece();
                 break;
 
+            // pause
             case "p":
                 paused = !paused;
                 updatePauseInfo();
                 break;
 
+            // reset
             case "r":
                 grid.reset();
                 activePiece = undefined;
