@@ -35,6 +35,11 @@ window.addEventListener(
 
                 break;
 
+            // rotate
+            case "ArrowUp":
+                activePiece.rotate();
+                break;
+
             //case space
             case " ":
                 activePiece.hardDrop();
