@@ -99,6 +99,4 @@ function gameOver() {
         grid.reset();
         grid.insertPiece(new Piece("Gameover", 1, 1));
         grid.draw();
-
-        // give back no piece to control
 }

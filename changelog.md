@@ -25,4 +25,3 @@
 - modularized spawnPiece() to use own variable and return the new piece
 - fixed out of bounds rotation to the sides
 - made game over its own function
-- 
