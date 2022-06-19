@@ -25,3 +25,6 @@
 - modularized spawnPiece() to use own variable and return the new piece
 - fixed out of bounds rotation to the sides
 - made game over its own function
+
+#### 19.06.2022 - clearLines rename
+- renamed checkFullLines (originally "clearLines") to clearFullLines

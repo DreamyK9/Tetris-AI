@@ -114,12 +114,12 @@ class Grid {
         }
     }
 
-    // check for full lines and remove them
-    checkFullLines() {
+    // check for full lines and clear them
+    clearFullLines() {
         // for every line in the grid
         for (let row = this.height - 1; row >= 0; row--) {
             // check if it's full
-            if (this.isRowFull(row)) {
+            if (this.isLineFull(row)) {
                 // if yes, clear it
                 this.clearLine(row);
             }
@@ -142,7 +142,7 @@ class Grid {
     }
 
     // check if a row is full
-    isRowFull(row) {
+    isLineFull(row) {
         for (let col = 0; col < this.width; col++) {
             if (! this.cells[row][col].active) {
                 return false;
