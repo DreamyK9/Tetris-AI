@@ -66,7 +66,7 @@ function draw() {
     grid.draw();
 
     //! clearLines doesn't work yet
-    //grid.clearLines();
+    //grid.clearFullLines();
 }
 
 // spawn new piece at top center of grid
