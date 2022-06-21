@@ -9,8 +9,9 @@ const COLOR = {
     red: () => fill(255, 0, 0),
     blue: () => fill(0, 0, 255),
     orange: () => fill(255, 127, 0),
-    black: () => fill(0, 0, 0)
-}
+    black: () => fill(0, 0, 0),
+    white: () => fill(255, 255, 255),
+};
 
 // representation of the game grid
 class Grid {
@@ -144,7 +145,7 @@ class Grid {
     // check if a row is full
     isRowFull(row) {
         for (let col = 0; col < this.width; col++) {
-            if (! this.cells[row][col].active) {
+            if (!this.cells[row][col].active) {
                 return false;
             }
         }
@@ -183,7 +184,7 @@ class Grid {
 // representation of the singles cells in the grid
 class Cell {
     constructor(x, y, size) {
-        this.color = COLOR.grey;
+        this.color = COLOR.black;
         this.active = false;
         this.size = size;
         this.offset = new Vector(x * this.size, y * this.size);
@@ -197,7 +198,7 @@ class Cell {
 
     // reset cell to empty
     reset() {
-        this.color = COLOR.grey;
+        this.color = COLOR.black;
         this.active = false;
     }
 
@@ -205,8 +206,7 @@ class Cell {
         // set fill color to color of current cell
         this.color();
         // set stroke color to black
-        stroke(0);
-
+        stroke(255);
         // draw cell
         square(this.offset.x, this.offset.y, CELL_SIZE);
     }

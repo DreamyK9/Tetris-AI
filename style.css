@@ -2,10 +2,28 @@ html,
 body {
     margin: 0;
     padding: 0;
+    background-color: #1e1e20;
 }
+
+body li {
+    color: white;
+}
+
+.background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
 canvas {
-    display: block;
-    margin: 10vh auto 0;
+    position: absolute;
+    top: 53%;
+    left: 51%;
+    /* postion realtive to background*/
+    transform: translate(-50%, -50%);
+    pointer-events: none
 }
 
 ul#status {
