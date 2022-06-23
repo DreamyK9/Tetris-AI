@@ -8,10 +8,12 @@ canvas {
     margin: 10vh auto 0;
 }
 
-ul#status {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    font-size: 1.5em;
+#play-btn {
+    position: absolute;
+    top: 1%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8vh;
+    height: 3vh;
+    font-size: 1em;
 }

@@ -7,18 +7,15 @@
         <link rel="stylesheet" href="style.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
         <title></title>
+
+        <!-- Game Interface -->
+        <script type="module" src="Javascript/Sketch.js"></script>
+        <!-- UI Controller -->
+        <script type="module" src="Javascript/UI.mjs"></script>
+
     </head>
 
     <body>
-        <ul id="status">
-            <li class="paused">
-                Playing
-            </li>
-        </ul>
-        <script src="Javascript/Utils.js"></script>
-        <script src="Javascript/Grid.js"></script>
-        <script src="Javascript/Piece.js"></script>
-        <script src="Javascript/InputManager.js"></script>
-        <script src="Javascript/Sketch.js"></script>
+        <button id="play-btn" >Pause</button>
     </body>
 </html>

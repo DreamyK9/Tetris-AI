@@ -1,20 +1,24 @@
 "use strict";
+import {Vector} from "./Utils.mjs";
 
-const COLOR = {
-    grey: () => fill(127, 127, 127),
-    cyan: () => fill(0, 255, 255),
-    yellow: () => fill(255, 255, 0),
-    purple: () => fill(128, 0, 128),
-    green: () => fill(0, 255, 0),
-    red: () => fill(255, 0, 0),
-    blue: () => fill(0, 0, 255),
-    orange: () => fill(255, 127, 0),
-    black: () => fill(0, 0, 0)
+export const COLOR = {
+    cyan: "00ffff",
+    yellow: "ffff00",
+    purple:"800080",
+    green: "00ff00",
+    red: "ff0000",
+    blue: "0000ff",
+    orange: "ff7f00",
+    grey: "7f7f7f",
+    black: "000000",
 }
 
 // representation of the game grid
-class Grid {
-    constructor(width, height, cellSize) {
+export class Grid {
+    constructor(p5, width, height, cellSize) {
+        // p5 instance
+        this.p5 = p5;
+
         // mathematical representation of the grid
 
         // width in cells
@@ -44,7 +48,7 @@ class Grid {
             this.cells[row] = [];
             // and fill each row with cells
             for (let col = 0; col < this.width; col++) {
-                this.cells[row][col] = new Cell(col, row, this.cellSize);
+                this.cells[row][col] = new Cell(this.p5, col, row, this.cellSize);
             }
         }
     }
@@ -66,7 +70,7 @@ class Grid {
     // draw all cells of the grid
     drawCells() {
         // set outline thickness for cells
-        strokeWeight(1);
+        this.p5.strokeWeight(1);
 
         // call draw() for each cell in each row
         for (let row = 0; row < this.height; row++) {
@@ -78,15 +82,15 @@ class Grid {
 
     // draw the grids border/outline
     drawOutline() {
-        strokeWeight(5);
+       this.p5.strokeWeight(5);
         // left border
-        line(0, 0, 0, this.pixel.height);
+        this.p5.line(0, 0, 0, this.pixel.height);
         // upper border
-        line(0, 0, this.pixel.width, 0);
+        this.p5.line(0, 0, this.pixel.width, 0);
         // right border
-        line(this.pixel.width, 0, this.pixel.width, this.pixel.height);
+        this.p5.line(this.pixel.width, 0, this.pixel.width, this.pixel.height);
         // bottom border
-        line(0, this.pixel.height, this.pixel.width, this.pixel.height);
+        this.p5.line(0, this.pixel.height, this.pixel.width, this.pixel.height);
     }
 
     // insert a piece into the grid, so that it's drawn
@@ -135,7 +139,7 @@ class Grid {
         let newRow = [];
         // fill the new row with cells
         for (let x = 0; x < this.width; x++)
-            newRow.push(new Cell(x, 0, CELL_SIZE));
+            newRow.push(new Cell(x, 0, this.cellSize));
 
         // add the new row to the top of the grid
         this.cells.unshift(newRow);
@@ -181,8 +185,9 @@ class Grid {
 }
 
 // representation of the singles cells in the grid
-class Cell {
-    constructor(x, y, size) {
+export class Cell {
+    constructor(p5, x, y, size) {
+        this.p5 = p5;
         this.color = COLOR.grey;
         this.active = false;
         this.size = size;
@@ -203,11 +208,11 @@ class Cell {
 
     draw() {
         // set fill color to color of current cell
-        this.color();
+        this.p5.fill(this.color);
         // set stroke color to black
-        stroke(0);
+        this.p5.stroke(0);
 
         // draw cell
-        square(this.offset.x, this.offset.y, CELL_SIZE);
+        this.p5.square(this.offset.x, this.offset.y, this.size);
     }
 }

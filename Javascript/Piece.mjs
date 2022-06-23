@@ -1,9 +1,10 @@
 "use strict";
+import {COLOR} from "./Grid.mjs";
 
 // time between piece drops
 const DROP_INTERVAL = 500; // ms
 
-const PIECE_COLORS = {
+export const PIECE_COLORS = {
     I: COLOR.cyan,
     J: COLOR.blue,
     L: COLOR.orange,
@@ -14,8 +15,8 @@ const PIECE_COLORS = {
     Gameover: COLOR.black
 }
 
-class Piece {
-    constructor(type, x, y) {
+export class Piece {
+    constructor(grid, type, x, y) {
         // visual representation
         this.type = type;
         this.representation = PATTERNS[type][0];
@@ -24,7 +25,7 @@ class Piece {
         // physical properties
         this.rotation = 0;
         this.size = this.representation.length;
-        this.x = x == undefined ? ceil((grid.width - this.size) / 2) : x;
+        this.x = x == undefined ? Math.ceil((grid.width - this.size) / 2) : x;
         this.y = y == undefined ? 0 : y;
 
         // time since last drop
@@ -82,7 +83,7 @@ class Piece {
     }
 }
 
-const PATTERNS = {
+export const PATTERNS = {
     O: [
         [
             [1, 1],
