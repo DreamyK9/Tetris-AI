@@ -1,7 +1,6 @@
 "use strict";
 
-
-const CELL_SIZE = 35;
+const CELL_SIZE = 21.5;
 const GRID_SIZE = {
     W: 10,
     H: 20,
@@ -18,7 +17,9 @@ let grid, activePiece;
 // setup called once at the start
 function setup() {
     // initialize canvas, grid and first active piece
-    createCanvas(GRID_SIZE.W * CELL_SIZE, GRID_SIZE.H * CELL_SIZE);
+    var canvas = createCanvas(GRID_SIZE.W * CELL_SIZE, GRID_SIZE.H * CELL_SIZE);
+    canvas.parent("sketch-holder");
+
     grid = new Grid(GRID_SIZE.W, GRID_SIZE.H, CELL_SIZE);
     activePiece = spawnPiece();
 }
@@ -50,10 +51,8 @@ function draw() {
 
         // if active piece hits the ground
         if (!grid.isValid(activePiece)) {
-
             // move it up into valid position
-            while (!grid.isValid(activePiece))
-                activePiece.moveUp();
+            while (!grid.isValid(activePiece)) activePiece.moveUp();
             grid.insertPiece(activePiece);
 
             // switch to new piece
@@ -72,7 +71,6 @@ function draw() {
 
 // spawn new piece at top center of grid
 function spawnPiece() {
-
     // get random piece type
     const PIECE_TYPE = random(["O", "J", "L", "S", "Z", "T", "I"]);
     // create new piece of that type
@@ -90,13 +88,13 @@ function spawnPiece() {
 }
 
 function gameOver() {
-        // The game is over!
+    // The game is over!
 
-        // break out of game loop
-        noLoop();
+    // break out of game loop
+    noLoop();
 
-        // draw "Game Over" text
-        grid.reset();
-        grid.insertPiece(new Piece("Gameover", 1, 1));
-        grid.draw();
+    // draw "Game Over" text
+    grid.reset();
+    grid.insertPiece(new Piece("Gameover", 1, 1));
+    grid.draw();
 }

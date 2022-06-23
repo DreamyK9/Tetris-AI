@@ -11,8 +11,8 @@ const PIECE_COLORS = {
     S: COLOR.green,
     T: COLOR.purple,
     Z: COLOR.red,
-    Gameover: COLOR.black
-}
+    Gameover: COLOR.white,
+};
 
 class Piece {
     constructor(type, x, y) {
@@ -74,10 +74,11 @@ class Piece {
             activePiece.moveDown();
         }
         activePiece.moveUp();
+        this.dropBuffer = DROP_INTERVAL;
     }
 
     rotate() {
-        this.rotation = (this.rotation+1) % 4;
+        this.rotation = (this.rotation + 1) % 4;
         this.representation = PATTERNS[this.type][this.rotation];
     }
 }
