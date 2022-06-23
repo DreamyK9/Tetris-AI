@@ -1,5 +1,5 @@
 "use strict";
-import {GAME} from "./Utils.mjs";
+import { GAME, togglePause } from "./Utils.mjs";
 
 export function setupInput(p5, grid, activePiece) {
     window.addEventListener(
@@ -50,10 +50,9 @@ export function setupInput(p5, grid, activePiece) {
 
                     while (!grid.isValid(activePiece)) {
                         //TODO: need to handle rotation into ground or other pieces
-                        if (activePiece.x < grid.width/2)
+                        if (activePiece.x < grid.width / 2)
                             activePiece.moveRight();
-                        else
-                            activePiece.moveLeft();
+                        else activePiece.moveLeft();
                     }
                     break;
 
@@ -65,8 +64,7 @@ export function setupInput(p5, grid, activePiece) {
 
                 // pause
                 case "p":
-                    GAME.paused = !GAME.paused;
-                    updatePauseInfo();
+                    togglePause();
                     break;
 
                 // reset

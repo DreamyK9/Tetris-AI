@@ -1,17 +1,17 @@
 "use strict";
-import {Vector} from "./Utils.mjs";
+import { Vector } from "./Utils.mjs";
 
 export const COLOR = {
     cyan: "00ffff",
     yellow: "ffff00",
-    purple:"800080",
+    purple: "800080",
     green: "00ff00",
     red: "ff0000",
     blue: "0000ff",
     orange: "ff7f00",
     grey: "7f7f7f",
     black: "000000",
-}
+};
 
 // representation of the game grid
 export class Grid {
@@ -48,7 +48,12 @@ export class Grid {
             this.cells[row] = [];
             // and fill each row with cells
             for (let col = 0; col < this.width; col++) {
-                this.cells[row][col] = new Cell(this.p5, col, row, this.cellSize);
+                this.cells[row][col] = new Cell(
+                    this.p5,
+                    col,
+                    row,
+                    this.cellSize
+                );
             }
         }
     }
@@ -82,7 +87,7 @@ export class Grid {
 
     // draw the grids border/outline
     drawOutline() {
-       this.p5.strokeWeight(5);
+        this.p5.strokeWeight(5);
         // left border
         this.p5.line(0, 0, 0, this.pixel.height);
         // upper border
@@ -148,7 +153,7 @@ export class Grid {
     // check if a row is full
     isLineFull(row) {
         for (let col = 0; col < this.width; col++) {
-            if (! this.cells[row][col].active) {
+            if (!this.cells[row][col].active) {
                 return false;
             }
         }

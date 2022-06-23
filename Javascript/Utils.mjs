@@ -1,5 +1,5 @@
 "use strict";
-import {PLAY_BTN } from "./UI.mjs";
+import { PLAY_BTN } from "./UI.mjs";
 
 export const GAME = {
     paused: false,
@@ -14,11 +14,8 @@ export class Vector {
 }
 
 export function togglePause() {
-    if (GAME.paused) {
-        PLAY_BTN.innerHTML = "Resume";
-        GAME.paused = false;
-    } else {
-        PLAY_BTN.innerHTML = "Pause";
-        GAME.paused = true;
-    }
+    if (GAME.paused) PLAY_BTN.innerHTML = "Resume";
+    else PLAY_BTN.innerHTML = "Pause";
+
+    GAME.paused = !GAME.paused;
 }
