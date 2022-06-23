@@ -117,6 +117,7 @@ class Grid {
 
     // check for full lines and clear them
     clearFullLines() {
+        console.log("clearing full lines");
         // for every line in the grid
         for (let row = this.height - 1; row >= 0; row--) {
             // check if it's full

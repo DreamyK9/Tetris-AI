@@ -54,9 +54,9 @@ function draw() {
             // move it up into valid position
             while (!grid.isValid(activePiece)) activePiece.moveUp();
             grid.insertPiece(activePiece);
-
             // switch to new piece
             activePiece = spawnPiece();
+            grid.clearFullLines();
         }
     }
     //============================
@@ -66,7 +66,6 @@ function draw() {
     grid.draw();
 
     //! clearLines doesn't work yet
-    //grid.clearFullLines();
 }
 
 // spawn new piece at top center of grid
@@ -74,7 +73,7 @@ function spawnPiece() {
     // get random piece type
     const PIECE_TYPE = random(["O", "J", "L", "S", "Z", "T", "I"]);
     // create new piece of that type
-    const PIECE = new Piece(PIECE_TYPE);
+    const PIECE = new Piece("O");
 
     // if there is no space for the new element
     if (!grid.isValid(PIECE)) {
