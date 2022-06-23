@@ -1,8 +1,8 @@
 "use strict";
-import {GAME} from "./Utils.mjs";
-import {Grid} from "./Grid.mjs";
-import {Piece} from "./Piece.mjs";
-import {setupInput} from "./InputManager.mjs";
+import { GAME } from "./Utils.mjs";
+import { Grid } from "./Grid.mjs";
+import { Piece } from "./Piece.mjs";
+import { setupInput } from "./InputManager.mjs";
 
 // control variables
 const CELL_SIZE = 35;
@@ -10,21 +10,22 @@ const GRID_WIDTH = 10;
 const GRID_HEIGHT = 20;
 
 // runtime variables
-let grid, activePiece, prev;
+let grid,
+    activePiece,
+    prev = 0;
 
 new p5((p5) => {
-
     // setup called once at the start
-    p5.setup = function() {
+    p5.setup = function () {
         // initialize canvas, grid and first active piece
         p5.createCanvas(GRID_WIDTH * CELL_SIZE, GRID_HEIGHT * CELL_SIZE);
         grid = new Grid(p5, GRID_WIDTH, GRID_HEIGHT, CELL_SIZE);
         activePiece = spawnPiece(p5);
         setupInput(p5, grid, activePiece);
-    }
+    };
 
     // game loop called every frame
-    p5.draw = function() {
+    p5.draw = function () {
         //============================
         // Get time passed since last frame
         //============================
@@ -52,10 +53,8 @@ new p5((p5) => {
 
             // if active piece hits the ground
             if (!grid.isValid(activePiece)) {
-
                 // move it up into valid position
-                while (!grid.isValid(activePiece))
-                    activePiece.moveUp();
+                while (!grid.isValid(activePiece)) activePiece.moveUp();
                 grid.insertPiece(activePiece);
 
                 // switch to new piece
@@ -70,12 +69,11 @@ new p5((p5) => {
 
         //! clearLines doesn't work yet
         //grid.clearFullLines();
-    }
+    };
 });
 
 // spawn new piece at top center of grid
 function spawnPiece(p5) {
-
     // get random piece type
     const PIECE_TYPE = p5.random(["O", "J", "L", "S", "Z", "T", "I"]);
     // create new piece of that type
@@ -93,13 +91,13 @@ function spawnPiece(p5) {
 }
 
 function gameOver(p5) {
-        // The game is over!
+    // The game is over!
 
-        // break out of game loop
-        p5.noLoop();
+    // break out of game loop
+    p5.noLoop();
 
-        // draw "Game Over" text
-        grid.reset();
-        grid.insertPiece(new Piece("Gameover", 1, 1));
-        grid.draw();
+    // draw "Game Over" text
+    grid.reset();
+    grid.insertPiece(new Piece("Gameover", 1, 1));
+    grid.draw();
 }
