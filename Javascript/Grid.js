@@ -117,30 +117,18 @@ class Grid {
 
     // check for full lines and clear them
     clearFullLines() {
-        console.log("clearing full lines");
         // for every line in the grid
         for (let row = this.height - 1; row >= 0; row--) {
             // check if it's full
             if (this.isLineFull(row)) {
                 // if yes, clear it
                 this.clearLine(row);
+
+                // because every line is shifted down one row
+                // we have to check the same line again
+                row++;
             }
         }
-    }
-
-    // remove a line from the grid
-    clearLine(n) {
-        // splice the row out of the array
-        this.cells.splice(n, 1);
-
-        // create new row
-        let newRow = [];
-        // fill the new row with cells
-        for (let x = 0; x < this.width; x++)
-            newRow.push(new Cell(x, 0, CELL_SIZE));
-
-        // add the new row to the top of the grid
-        this.cells.unshift(newRow);
     }
 
     // check if a row is full
@@ -151,6 +139,24 @@ class Grid {
             }
         }
         return true;
+    }
+
+    // remove a line from the grid
+    clearLine(n) {
+        // change the state of the cells in the line to inactive
+        // shift all cells above the line down one row
+        for (let row = n; row > 0; row--) {
+            for (let col = 0; col < this.width; col++) {
+                let cellabove = this.cells[row - 1][col];
+                this.cells[row][col].active = cellabove.active;
+                this.cells[row][col].color = cellabove.color;
+            }
+        }
+        // reset the first row
+        for (let col = 0; col < this.width; col++) {
+            this.cells[0][col].reset();
+        }
+        
     }
 
     // check if a piece is in a valid position

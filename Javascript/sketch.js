@@ -52,11 +52,16 @@ function draw() {
         // if active piece hits the ground
         if (!grid.isValid(activePiece)) {
             // move it up into valid position
-            while (!grid.isValid(activePiece)) activePiece.moveUp();
+            activePiece.moveUp();
+
+            // insert it into the grid
             grid.insertPiece(activePiece);
+            
+            // clear full lines
+            grid.clearFullLines();
+
             // switch to new piece
             activePiece = spawnPiece();
-            grid.clearFullLines();
         }
     }
     //============================
