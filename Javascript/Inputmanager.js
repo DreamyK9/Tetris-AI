@@ -44,13 +44,8 @@ window.addEventListener(
 
             // rotate
             case "ArrowUp":
+                //TODO: need to handle rotation into ground or other pieces
                 activePiece.rotate();
-
-                while (!grid.isValid(activePiece)) {
-                    //TODO: need to handle rotation into ground or other pieces
-                    if (activePiece.x < 5) activePiece.moveRight();
-                    else activePiece.moveLeft();
-                }
                 break;
 
             // instant drop

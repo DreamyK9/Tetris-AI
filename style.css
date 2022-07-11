@@ -19,9 +19,8 @@ body li {
 
 canvas {
     position: absolute;
-    top: 53%;
-    left: 51%;
-    /* postion realtive to background*/
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none
 }

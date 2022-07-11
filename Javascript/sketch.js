@@ -1,6 +1,6 @@
 "use strict";
 
-const CELL_SIZE = 21.5;
+const CELL_SIZE = 27;
 const GRID_SIZE = {
     W: 10,
     H: 20,
@@ -78,7 +78,7 @@ function spawnPiece() {
     // get random piece type
     const PIECE_TYPE = random(["O", "J", "L", "S", "Z", "T", "I"]);
     // create new piece of that type
-    const PIECE = new Piece("O");
+    const PIECE = new Piece(PIECE_TYPE);
 
     // if there is no space for the new element
     if (!grid.isValid(PIECE)) {
