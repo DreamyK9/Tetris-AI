@@ -6,15 +6,48 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="style.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+        
         <title></title>
     </head>
 
     <body>
-        <ul id="status">
-            <li class="paused">
-                Playing
-            </li>
-        </ul>
+
+        <div class="wrapper">
+            <div class="lines">
+                Lines: 0
+            </div>
+
+            <div class="game">
+                <div class="left-container">
+                    <div class="playButton"></div>
+                    <section class="statistics-container">
+                        Statistics
+                        <div class="statistics">A</div>
+                    </section>
+                </div>
+                
+                <div id="sketch-holder"></div>
+
+                <div class="right-container">
+                    <section>
+                        Next
+                        <div>A</div>
+                    </section>
+
+                    <section>
+                        Score
+                        <div class="score">0000000</div>
+                    </section>
+
+                    <section>
+                        Level
+                        <div class="level">0</div>
+                    </section>
+                </div>
+                
+            </div>
+        </div>
+        
 
         <script src="Javascript/Utils.js"></script>
         <script src="Javascript/Grid.js"></script>
@@ -22,8 +55,8 @@
         <script src="Javascript/InputManager.js"></script>
         <script src="Javascript/Sketch.js"></script>
         
-        <div id="sketch-holder"></div>
-
+        
+        
         
        
     </body>

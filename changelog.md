@@ -37,3 +37,16 @@
 #### 21.06.2022 - NES Visuals
 
 -   Implemented NES Playfield design, but playfield doesnt fill the whole area yet
+
+#### 11.07.2022 - Fixed Bug
+
+-   Fixed the line clearing bug
+
+#### 12.07.2022 - Complete redesign of game visuals
+
+-   Implemented Play/Pause button with functionality
+-   Refactored frontend using flexbox container
+-   implemented score, level, line counter
+-   pieces fall faster when level increases, based upon tetris NES values
+-   level increases when 10 lines in each level are cleared
+-   score increases depending on the number of line clears with 1 "move" based upon tetris NES values

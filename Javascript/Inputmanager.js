@@ -56,16 +56,12 @@ window.addEventListener(
 
             // pause
             case "p":
-                GAME.paused = !GAME.paused;
                 updatePauseInfo();
                 break;
 
             // reset
             case "r":
-                grid.reset();
-                activePiece = spawnPiece();
-                // start game loop, in case it was stopped before
-                loop();
+                window.location.reload();
                 break;
         }
 
@@ -74,3 +70,5 @@ window.addEventListener(
     },
     true
 );
+
+

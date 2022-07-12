@@ -1,6 +1,6 @@
 "use strict";
 
-const CELL_SIZE = 27;
+const CELL_SIZE = 35;
 const GRID_SIZE = {
     W: 10,
     H: 20,
@@ -9,6 +9,9 @@ const GRID_SIZE = {
 const GAME = {
     paused: false,
     controlsLocked: false,
+    level: 0,
+    score: 0,
+    linescleared: 0,
 };
 
 // runtime variables
@@ -69,8 +72,6 @@ function draw() {
     //============================
     if (activePiece) grid.insertPiece(activePiece);
     grid.draw();
-
-    //! clearLines doesn't work yet
 }
 
 // spawn new piece at top center of grid
@@ -78,7 +79,7 @@ function spawnPiece() {
     // get random piece type
     const PIECE_TYPE = random(["O", "J", "L", "S", "Z", "T", "I"]);
     // create new piece of that type
-    const PIECE = new Piece(PIECE_TYPE);
+    const PIECE = new Piece("I");
 
     // if there is no space for the new element
     if (!grid.isValid(PIECE)) {

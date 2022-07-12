@@ -1,7 +1,7 @@
 "use strict";
 
 // time between piece drops
-const DROP_INTERVAL = 500; // ms
+let DROP_INTERVAL = 799; // ms
 
 const PIECE_COLORS = {
     I: COLOR.cyan,
@@ -11,7 +11,7 @@ const PIECE_COLORS = {
     S: COLOR.green,
     T: COLOR.purple,
     Z: COLOR.red,
-    Gameover: COLOR.white,
+    Gameover: COLOR.black,
 };
 
 class Piece {
@@ -40,17 +40,6 @@ class Piece {
     get dropReady() {
         return this.dropBuffer > DROP_INTERVAL;
     }
-
-    // !unused own draw function
-    // draw() {
-    //     for (let row = 0; row < this.size; row++) {
-    //         for (let col = 0; col < this.size; col++) {
-    //             if (this.representation[row][col]) {
-    //                 this.cells[col][row].draw(this.x + col, this.y + row);
-    //             }
-    //         }
-    //     }
-    // }
 
     resetBuffer() {
         this.dropBuffer = 0;

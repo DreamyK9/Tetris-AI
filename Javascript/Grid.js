@@ -79,7 +79,9 @@ class Grid {
 
     // draw the grids border/outline
     drawOutline() {
-        strokeWeight(5);
+        strokeWeight(8);
+
+        stroke(0);
         // left border
         line(0, 0, 0, this.pixel.height);
         // upper border
@@ -117,6 +119,9 @@ class Grid {
 
     // check for full lines and clear them
     clearFullLines() {
+        // keep track of how many lines are cleared to update score
+        let lines = 0;
+
         // for every line in the grid
         for (let row = this.height - 1; row >= 0; row--) {
             // check if it's full
@@ -124,10 +129,22 @@ class Grid {
                 // if yes, clear it
                 this.clearLine(row);
 
+                // and increase the number of lines cleared
+                lines++;
+                updateLines();
+
                 // because every line is shifted down one row
                 // we have to check the same line again
                 row++;
             }
+        }
+
+        // update score
+        updateScore(lines);
+
+        // update level if necessary in Tetris NES style
+        if (GAME.linescleared >= (GAME.level+1) * 10) {
+            updateLevel();
         }
     }
 
@@ -156,7 +173,6 @@ class Grid {
         for (let col = 0; col < this.width; col++) {
             this.cells[0][col].reset();
         }
-        
     }
 
     // check if a piece is in a valid position
@@ -191,7 +207,7 @@ class Grid {
 // representation of the singles cells in the grid
 class Cell {
     constructor(x, y, size) {
-        this.color = COLOR.black;
+        this.color = COLOR.white;
         this.active = false;
         this.size = size;
         this.offset = new Vector(x * this.size, y * this.size);
@@ -205,7 +221,7 @@ class Cell {
 
     // reset cell to empty
     reset() {
-        this.color = COLOR.black;
+        this.color = COLOR.white;
         this.active = false;
     }
 
@@ -213,7 +229,8 @@ class Cell {
         // set fill color to color of current cell
         this.color();
         // set stroke color to black
-        stroke(255);
+        stroke(200);
+
         // draw cell
         square(this.offset.x, this.offset.y, CELL_SIZE);
     }
