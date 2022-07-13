@@ -143,7 +143,7 @@ class Grid {
         updateScore(lines);
 
         // update level if necessary in Tetris NES style
-        if (GAME.linescleared >= (GAME.level+1) * 10) {
+        if (GAME.linescleared >= (GAME.level + 1) * 10) {
             updateLevel();
         }
     }
@@ -228,8 +228,11 @@ class Cell {
     draw() {
         // set fill color to color of current cell
         this.color();
+
         // set stroke color to black
         stroke(200);
+
+        strokeWeight(1);
 
         // draw cell
         square(this.offset.x, this.offset.y, CELL_SIZE);

@@ -7,55 +7,49 @@ class Vector {
     }
 }
 
-
-
 //! WIP
-const levelElement = document.querySelector('.level');
-const linesElement = document.querySelector('.lines');
-const scoreElement = document.querySelector('.score');
-const playButton = document.querySelector('.playButton');
+const levelElement = document.querySelector(".level");
+const linesElement = document.querySelector(".lines");
+const scoreElement = document.querySelector(".score");
+const playButton = document.querySelector(".playButton");
 
-playButton.addEventListener('click', function handleClick(event) {
-  updatePauseInfo();
+playButton.addEventListener("click", function handleClick(event) {
+    updatePauseInfo();
 });
 
-function updatePauseInfo () {
+function updatePauseInfo() {
     GAME.paused = !GAME.paused;
-    playButton.classList.toggle('paused');
+    playButton.classList.toggle("paused");
 }
 
-function updateScore (lines) {
+function updateScore(lines) {
     if (lines == 0) return;
     GAME.score += scoreMultiplier[lines] * (GAME.level + 1);
     //add trailing zeros to score up to 7 digits
-    scoreElement.textContent = GAME.score.toString().padStart(7, '0');
+    scoreElement.textContent = GAME.score.toString().padStart(7, "0");
 }
 
 function updateLines() {
     linesElement.textContent = "Lines: " + ++GAME.linescleared;
 }
 
-function updateLevel () {
+function updateLevel() {
     levelElement.textContent = ++GAME.level;
 
     // increase game speed depending on gameSpeed
     if (GAME.level > 28) {
         DROP_INTERVAL = 17;
-    }
-
-    else {
+    } else {
         DROP_INTERVAL = gameSpeed[GAME.level];
     }
-
-
 }
 
 const scoreMultiplier = {
     1: 40,
     2: 100,
     3: 300,
-    4: 1200
-}
+    4: 1200,
+};
 
 // Tetris NES sec/drop table
 const gameSpeed = {
@@ -87,4 +81,4 @@ const gameSpeed = {
     26: 33,
     27: 33,
     28: 33,
-}
+};

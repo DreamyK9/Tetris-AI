@@ -50,3 +50,8 @@
 -   pieces fall faster when level increases, based upon tetris NES values
 -   level increases when 10 lines in each level are cleared
 -   score increases depending on the number of line clears with 1 "move" based upon tetris NES values
+
+#### 13.07.2022 - Fix rotation system
+
+-   added rotate function for clockwise and counter-clockwise rotation
+-   fixed bug that game crashed on some rotations

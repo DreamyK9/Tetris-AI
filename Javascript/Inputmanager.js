@@ -45,7 +45,11 @@ window.addEventListener(
             // rotate
             case "ArrowUp":
                 //TODO: need to handle rotation into ground or other pieces
-                activePiece.rotate();
+                activePiece.rotateCW();
+                if (!grid.isValid(activePiece)) {
+                    activePiece.rotateCCW();
+                }
+
                 break;
 
             // instant drop
@@ -70,5 +74,3 @@ window.addEventListener(
     },
     true
 );
-
-

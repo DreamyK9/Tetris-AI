@@ -59,7 +59,7 @@ function draw() {
 
             // insert it into the grid
             grid.insertPiece(activePiece);
-            
+
             // clear full lines
             grid.clearFullLines();
 
@@ -78,8 +78,9 @@ function draw() {
 function spawnPiece() {
     // get random piece type
     const PIECE_TYPE = random(["O", "J", "L", "S", "Z", "T", "I"]);
+
     // create new piece of that type
-    const PIECE = new Piece("I");
+    const PIECE = new Piece(PIECE_TYPE);
 
     // if there is no space for the new element
     if (!grid.isValid(PIECE)) {
