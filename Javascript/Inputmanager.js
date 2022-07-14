@@ -55,7 +55,6 @@ window.addEventListener(
             // instant drop
             case " ": // space
                 activePiece.hardDrop();
-                spawnPiece();
                 break;
 
             // pause

@@ -15,14 +15,14 @@ const GAME = {
 };
 
 // runtime variables
-let grid, activePiece;
+let grid, activePiece, nextType;
 
 // setup called once at the start
 function setup() {
     // initialize canvas, grid and first active piece
     var canvas = createCanvas(GRID_SIZE.W * CELL_SIZE, GRID_SIZE.H * CELL_SIZE);
     canvas.parent("sketch-holder");
-
+    nextType = uniquePiece();
     grid = new Grid(GRID_SIZE.W, GRID_SIZE.H, CELL_SIZE);
     activePiece = spawnPiece();
 }
@@ -74,10 +74,22 @@ function draw() {
     grid.draw();
 }
 
+function uniquePiece(currPiece) {
+    //! alternative version, all consecutive pieces are different
+    //let unique = random(["O", "J", "L", "S", "Z", "T", "I"].filter((piece) => piece !== currPiece));
+
+    //! Tetris NES version
+    let unique = random(["O", "J", "L", "S", "Z", "T", "I"]);
+    if (currPiece === unique) {
+        unique = random(["O", "J", "L", "S", "Z", "T", "I"]);
+    }
+    return unique;
+}
+
 // spawn new piece at top center of grid
 function spawnPiece() {
     // get random piece type
-    const PIECE_TYPE = random(["O", "J", "L", "S", "Z", "T", "I"]);
+    const PIECE_TYPE = nextType;
 
     // create new piece of that type
     const PIECE = new Piece(PIECE_TYPE);
@@ -88,6 +100,11 @@ function spawnPiece() {
         gameOver();
         return undefined;
     }
+
+    // determining different next Piece to display
+    nextType = uniquePiece(nextType);
+    // display next piece
+    updateNext(nextType);
 
     // give back new piece
     return PIECE;

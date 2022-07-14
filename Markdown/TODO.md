@@ -6,6 +6,7 @@
 -   [x] implement rotation
 -   [x] implement algorithm for choosing pieces
 -   [ ] implement locking player controls
+-   [ ] implement sprite for cells or border
 
 ## ISSUES
 

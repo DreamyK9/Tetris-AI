@@ -12,10 +12,17 @@ const levelElement = document.querySelector(".level");
 const linesElement = document.querySelector(".lines");
 const scoreElement = document.querySelector(".score");
 const playButton = document.querySelector(".playButton");
+const displayNext = document.querySelector(".next");
 
 playButton.addEventListener("click", function handleClick(event) {
     updatePauseInfo();
 });
+
+function updateNext() {
+    //display image of next piece
+    displayNext.innerHTML =
+        '<img src="Assets/Pieces/' + nextType + '.png" alt="next piece">';
+}
 
 function updatePauseInfo() {
     GAME.paused = !GAME.paused;

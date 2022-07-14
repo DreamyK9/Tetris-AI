@@ -55,3 +55,8 @@
 
 -   added rotate function for clockwise and counter-clockwise rotation
 -   fixed bug that game crashed on some rotations
+
+#### 13.07.2022 - Display next piece
+
+-   restruction
+-   added next piece functionality

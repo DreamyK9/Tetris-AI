@@ -5,4 +5,7 @@ We want to create our first artificial intelligence in JavaScript using the p5.j
 
 The AI will be able to play Tetris, a worldwide known videogame which is hopefully easy to recreate.
 
-Current Status: Create Tetris
+David's Tetris Highscore:
+
+-   Lines: 63
+-   Score: 19260
