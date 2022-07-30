@@ -44,7 +44,6 @@ window.addEventListener(
 
             // rotate
             case "ArrowUp":
-                //TODO: need to handle rotation into ground or other pieces
                 activePiece.rotateCW();
                 if (!grid.isValid(activePiece)) {
                     activePiece.rotateCCW();
